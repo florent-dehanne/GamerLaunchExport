@@ -1,5 +1,5 @@
 {
-  "format": "ornaweb.import.v1",
+  "format": "import.v1",
   "source": {
     "platform": "gamer-launch",
     "exportedAt": "2026-10-16T09:00:00.000Z",

@@ -1,23 +1,23 @@
-# The `ornaweb.import.v1` format
+# The `import.v1` format
 
 A small, neutral JSON format for moving guild/community content between platforms. It carries no
 Gamer Launch (or phpBB) specifics in its structure — the origin is isolated in a `source` block, so
 the same format can describe content from any platform and be imported anywhere.
 
-See [`examples/ornaweb-import-forum-example.json`](examples/ornaweb-import-forum-example.json) for a
+See [`examples/import-forum-example.json`](examples/import-forum-example.json) for a
 complete file.
 
 ## Envelope
 
 ```json
 {
-  "format": "ornaweb.import.v1",
+  "format": "import.v1",
   "source": { "platform": "gamer-launch", "exportedAt": "2026-10-16T09:00:00.000Z", "siteRef": "132742" },
   "forum": { "categories": [ ... ] }
 }
 ```
 
-- **`format`** — always `"ornaweb.import.v1"`.
+- **`format`** — always `"import.v1"`.
 - **`source`** — where the data came from, kept separate from the content itself:
   - `platform` — the origin platform (e.g. `"gamer-launch"`).
   - `exportedAt` — when the export ran, ISO 8601.

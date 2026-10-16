@@ -9,7 +9,7 @@
  * Minimisation by default (see OPTIONS): no avatars (the Gravatar address is a
  * hash of the e-mail), anonymous authors dropped, optional cut-off date.
  *
- * Output: a JSON file in the ornaweb.import.v1 format (see FORMAT.md).
+ * Output: a JSON file in the import.v1 format (see FORMAT.md).
  */
 (async () => {
     const OPTIONS = {
@@ -162,10 +162,10 @@
     const forums = await readIndex();
     console.log(`${forums.length} forums found.`);
 
-    // ornaweb.import.v1 format: neutral envelope, provenance isolated in `source`,
+    // import.v1 format: neutral envelope, provenance isolated in `source`,
     // categories → forums → topics → posts. One file = one content type.
     const out = {
-        format: 'ornaweb.import.v1',
+        format: 'import.v1',
         source: { platform: 'gamer-launch', exportedAt: new Date().toISOString(), siteRef: gid },
         forum: { categories: [] },
     };
@@ -212,7 +212,7 @@
     const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `ornaweb-import-forum-${gid}.json`;
+    a.download = `import-forum-${gid}.json`;
     document.body.appendChild(a);
     a.click();
     a.remove();

@@ -7,7 +7,7 @@ Export your **Gamer Launch** guild's forum to a JSON file, before the platform g
 > open tool to save your forum content while it's still readable.
 
 The script runs **in your own browser**, reading only the pages your logged-in session already
-sees. It produces a JSON file in the neutral [`ornaweb.import.v1`](FORMAT.md) format, which can be
+sees. It produces a JSON file in the neutral [`import.v1`](FORMAT.md) format, which can be
 re-imported into [Guildi](https://guildi.com) — or into anything else that reads the format.
 
 ## What you need
@@ -25,7 +25,7 @@ re-imported into [Guildi](https://guildi.com) — or into anything else that rea
 4. **Let it run.** It reads the forum page by page, **one request per second** so it doesn't hammer
    the site — a few minutes for a small forum, longer for a big one. Progress is printed in the
    console.
-5. When it finishes, a file named **`ornaweb-import-forum-<gid>.json`** downloads automatically. If
+5. When it finishes, a file named **`import-forum-<gid>.json`** downloads automatically. If
    the download is blocked, the result is available in the console as `window.__glExport`.
 
 ## What it exports (and what it doesn't)
