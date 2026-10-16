@@ -1,0 +1,75 @@
+{
+  "format": "ornaweb.import.v1",
+  "source": {
+    "platform": "gamer-launch",
+    "exportedAt": "2026-10-16T09:00:00.000Z",
+    "siteRef": "132742"
+  },
+  "forum": {
+    "categories": [
+      {
+        "name": "General",
+        "forums": [
+          {
+            "name": "Announcements",
+            "externalRef": "1",
+            "topics": [
+              {
+                "title": "Welcome to the guild forum",
+                "pinned": true,
+                "externalRef": "1001",
+                "posts": [
+                  {
+                    "author": { "name": "Shadow" },
+                    "postedAt": "2020-02-17",
+                    "bodyHtml": "<p>Welcome everyone! Introduce yourself here.</p>"
+                  },
+                  {
+                    "author": { "name": "Lyra" },
+                    "postedAt": "2020-02-18",
+                    "bodyHtml": "<p>Can't wait to raid with you all.</p>"
+                  }
+                ]
+              },
+              {
+                "title": "Guild rules",
+                "pinned": true,
+                "externalRef": "1002",
+                "posts": [
+                  {
+                    "author": { "name": "Shadow" },
+                    "postedAt": "2020-03-01",
+                    "bodyHtml": "<p>Please read the rules before posting.</p>"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Guild life",
+        "forums": [
+          {
+            "name": "Off-topic",
+            "externalRef": "2",
+            "topics": [
+              {
+                "title": "Your favourite memes",
+                "pinned": false,
+                "externalRef": "2001",
+                "posts": [
+                  {
+                    "author": { "name": "Kael" },
+                    "postedAt": "2021-01-05",
+                    "bodyHtml": "<p>Post the best ones here 😄</p>"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
