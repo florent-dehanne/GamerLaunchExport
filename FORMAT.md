@@ -65,6 +65,7 @@ Categories contain forums, forums contain topics, topics contain posts:
 | `…topics[].title` | yes | Topic title. |
 | `…topics[].pinned` | no | `true` for a pinned/announcement topic. |
 | `…topics[].externalRef` | no | The source topic id. |
+| `…posts[].externalRef` | no | The source post id, when the source exposes one (Gamer Launch's mobile forum does not). |
 | `…posts[].author.name` | yes | The author's display name (a label, not an account). |
 | `…posts[].author.avatar` | no | Avatar URL, only if the exporter was asked to keep it. |
 | `…posts[].postedAt` | no | Post date, ISO 8601 (`YYYY-MM-DD`). |
@@ -79,5 +80,8 @@ Categories contain forums, forums contain topics, topics contain posts:
 - **`author` is a label, not an account.** Imported posts are attributed by the importer, which may
   map a name to an existing member or create a placeholder — that's an import concern, not the
   format's.
-- **Posts have no id of their own** in a Gamer Launch export (the mobile forum doesn't expose one),
-  so de-duplication on re-import happens at the topic level.
+- **De-duplication follows the data, not the source.** An importer should resolve each entity that
+  carries an `externalRef`, and fall back to the nearest parent that has one for those that don't. A
+  Gamer Launch export has no post ids (its mobile forum doesn't expose them), so posts de-duplicate at
+  the topic level; a source that does provide post ids would de-duplicate per post, with no change to
+  the importer.
