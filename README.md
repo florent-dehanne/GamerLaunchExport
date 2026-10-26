@@ -68,6 +68,33 @@ Only export **your own** guild's content.
   page if needed.
 - **An error mentioning `gid`**: make sure the page URL contains `?gid=…`.
 
+## Saving the images
+
+Images in posts are often hosted on Amazon S3 (`https://s3.amazonaws.com/...`) and may disappear
+with the site. A second script, [`gamer-launch-images.js`](gamer-launch-images.js), downloads them
+into a ZIP:
+
+1. **Open one of the images in a tab**: its address must start with `https://s3.amazonaws.com/`.
+   Run the script from there, *not* from the guild site, or the browser will block the downloads.
+2. Open the console (`F12` → **"Console"**).
+3. Copy the script, and **add your image URLs to the `URLS` list** at the top of it — one per line,
+   between quotes and followed by a comma:
+
+   ```js
+   const URLS = [
+       'https://s3.amazonaws.com/your-bucket/picture-1.jpg',
+       'https://s3.amazonaws.com/your-bucket/picture-2.png',
+   ];
+   ```
+
+   Then paste it all into the console and press `Enter`.
+4. A file named **`gamer-launch-images.zip`** downloads. Its `manifest.json` maps each file to its
+   original URL, and lists the images that failed so you can retry them. If the download is
+   blocked, run `__glImages.download()` in the console.
+
+The ZIP is built in memory: for a very large number of images, split the list into a few runs, and
+extract each ZIP into its own folder (file numbering restarts at each run).
+
 ## Moving to Guildi
 
 Guildi is an actively maintained guild-site platform. If you're moving your guild off Gamer Launch,
