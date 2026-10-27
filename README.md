@@ -68,11 +68,36 @@ Only export **your own** guild's content.
   page if needed.
 - **An error mentioning `gid`**: make sure the page URL contains `?gid=…`.
 
+## Listing the File Library and the galleries
+
+A guild site keeps files in two separate places, each with its own script. Both run like the forum
+export — from a page of your guild site with `?gid=…` in the URL, in the console — and download a
+ready-to-use list of URLs:
+
+| Script | Reads | Downloads |
+|---|---|---|
+| [`gamer-launch-library-urls.js`](gamer-launch-library-urls.js) | The **File Library** (the "File Library" tab of the gallery) | `library-urls-<gid>.txt` |
+| [`gamer-launch-gallery-urls.js`](gamer-launch-gallery-urls.js) | Every **gallery**, page by page, one request per second | `gallery-urls-<gid>.txt` |
+
+Galleries are listed with their images in **original size**, and a comment line before each gallery
+so you can find your way around (and remove the ones you don't want):
+
+```js
+const URLS = [
+    // Gallery "Black Desert"
+    'https://s3.amazonaws.com/galleries.guildlaunch.net/123456/picture.jpg',
+    // Gallery "Screenshots"
+    ...
+];
+```
+
+Paste that list into the next script to download the files. If the download of the list is blocked,
+it is also in the console as `window.__glLibraryUrls` / `window.__glGalleryUrls`.
+
 ## Saving the images
 
 Images in posts are often hosted on Amazon S3 (`https://s3.amazonaws.com/...`) and may disappear
-with the site. A second script, [`gamer-launch-images.js`](gamer-launch-images.js), downloads them
-into a ZIP:
+with the site. [`gamer-launch-images.js`](gamer-launch-images.js) downloads them into a ZIP:
 
 1. **Open one of the images in a tab**: its address must start with `https://s3.amazonaws.com/`.
    Run the script from there, *not* from the guild site, or the browser will block the downloads.
@@ -87,7 +112,8 @@ into a ZIP:
    ];
    ```
 
-   Then paste it all into the console and press `Enter`.
+   You can replace the whole `const URLS = [ … ];` block with one of the lists above. Then paste
+   it all into the console and press `Enter`.
 4. A file named **`gamer-launch-images.zip`** downloads. Its `manifest.json` maps each file to its
    original URL, and lists the images that failed so you can retry them. If the download is
    blocked, run `__glImages.download()` in the console.

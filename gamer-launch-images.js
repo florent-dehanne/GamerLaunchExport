@@ -33,9 +33,22 @@
     // Any S3 URL as path-style https, so it is same-origin with the tab;
     // null for a URL that is not on S3
     const toS3Url = (raw) => {
+        // Trailing punctuation, and a ")" closing a parenthesis opened before the URL:
+        // "(https://…/a_(3).jpg)," → "https://…/a_(3).jpg"
+        let text = raw.replace(/&amp;/g, '&');
+        for (;;) {
+            const trimmed = text.replace(/[.,;:!?]+$/, '');
+            const unbalanced = trimmed.endsWith(')')
+                && trimmed.split('(').length < trimmed.split(')').length;
+            const next = unbalanced ? trimmed.slice(0, -1) : trimmed;
+            if (next === text) {
+                break;
+            }
+            text = next;
+        }
         let url;
         try {
-            url = new URL(raw.replace(/&amp;/g, '&').replace(/[.,;:!?]+$/, ''));
+            url = new URL(text);
         } catch {
             return null;
         }
@@ -52,7 +65,7 @@
     };
 
     // An entry may also be a piece of HTML or JSON: every URL in it is picked out
-    const found = URLS.flatMap((text) => String(text).match(/https?:\/\/[^\s"'<>()\\]+/gi) || []);
+    const found = URLS.flatMap((text) => String(text).match(/https?:\/\/[^\s"'<>\\]+/gi) || []);
     const skipped = [];
     const urls = [];
     for (const raw of found) {
