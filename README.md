@@ -91,6 +91,15 @@ const URLS = [
 ];
 ```
 
+The File Library list keeps **only images** by default: videos and other files can weigh tens of MB
+each and make the ZIP slow and heavy. They are listed at the end, commented out with their size —
+remove the `//` in front of the ones you want (or set `includeOtherFiles: true` at the top of the
+script to list everything):
+
+```js
+    // 'https://s3.amazonaws.com/file3.guildlaunch.net/123456/video.mp4', // 42.29 MB
+```
+
 Paste that list into the next script to download the files. If the download of the list is blocked,
 it is also in the console as `window.__glLibraryUrls` / `window.__glGalleryUrls`.
 
